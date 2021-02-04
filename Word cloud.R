@@ -53,14 +53,21 @@ df.single <- df
 newList <- data.frame(word=character(), 
                       freq=character())
 
-for (i in 1:5){
-  print(df.single$word[grepl(paste("^", df.single[i, 1], "s{1}", sep = ""), df.single$word)])
-  print(length(grep(paste("^", df.single[i, 1], "s{1}", sep = ""), df.single$word)))
+for (i in 1:10){
+  cat(paste0("\n", df.single[i, 1], "\n"))
+  cat(paste0(df.single[i, 2], "\n"))
+  
+  matches <- df.single$word[grepl(paste("^", df.single[i, 1], "s{1}", sep = ""), df.single$word)]
+  matchFreq <- df.single$freq[grepl(paste("^", df.single[i, 1], "s{1}", sep = ""), df.single$word)]
+  
+  print(matches)
+  print(matchFreq)
   
   if (length(grep(paste("^", df.single[i, 1], "s{1}", sep = ""), df.single$word)) == 0) {
     newList <- rbind(newList, c(df.single[i, 1], df.single[i, 2]))
   }
   else {
+    #for (j in 1:length())
     # keep root word, total frequencies, remove matching terms
   }
 }
