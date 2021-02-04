@@ -69,10 +69,13 @@ for (i in 1:10){
     newList <- rbind(newList, c(searchTerm, searchTermFreq))
   }
   else {
-    print(sum(matchFreq)) # Sum match frequencies
+    aggregateSum <- sum(searchTermFreq, matchFreq) # Sum match frequencies
+    
+    # Add this to newList
+    newList <- rbind(newList, c(searchTerm, aggregateSum))
     
     # Remove all summed terms
-    df.single <- df.single[!]
+    #df.single <- df.single[!(grepl(matches, df.single[, 1]) & grepl(searchTerm, df.single[, 1]))]
     
     
     
