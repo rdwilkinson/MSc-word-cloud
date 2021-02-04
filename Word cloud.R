@@ -67,7 +67,13 @@ for (i in 1:10){
     newList <- rbind(newList, c(df.single[i, 1], df.single[i, 2]))
   }
   else {
-    #for (j in 1:length())
+    print(sum(matchFreq)) # Sum match frequencies
+    
+    
+    # for (j in 1:length(matches)) { # Cycle through each match
+    #   sumFreq <- sumFreq + as.integer(matchFreq[[j]])
+    #   print(paste0("Sum: ", matchFreq))
+    # }
     # keep root word, total frequencies, remove matching terms
   }
 }
