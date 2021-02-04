@@ -54,7 +54,10 @@ newList <- data.frame(word=character(),
                       freq=character(),
                       otherMatches=character())
 
-for (i in 1:200){
+newDfnrow <- nrow(df.single) # Initially set number of rows
+
+for (i in 1:newDfnrow){
+  print(newDfnrow)
   #cat(paste0("\n", df.single[i, 1], "\n"))
   #cat(paste0(df.single[i, 2], "\n"))
   
@@ -78,15 +81,9 @@ for (i in 1:200){
     # Remove all summed terms
     for (k in 1:length(matches)) {
       df.single <- df.single[!(grepl(matches[k], df.single[, 1])),]
+      
+      newDfnrow <- nrow(df.single) # Update number of rows for loop
     }
-    
-    
-    
-    # for (j in 1:length(matches)) { # Cycle through each match
-    #   sumFreq <- sumFreq + as.integer(matchFreq[[j]])
-    #   print(paste0("Sum: ", matchFreq))
-    # }
-    # keep root word, total frequencies, remove matching terms
   }
 }
 
