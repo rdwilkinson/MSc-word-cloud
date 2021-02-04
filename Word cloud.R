@@ -13,6 +13,7 @@ library(wordcloud2)
 library(tm)
 library(textreadr)
 library(tidyverse)
+library(kableExtra) # Output tables
 
 # Load text data
 MSD1 <- read_docx("Texts/MSD1.docx")
@@ -50,6 +51,8 @@ df <- data.frame(word = names(words),freq=words)
 
 # Singularise where possible
 df.single <- df
+newdata <- mydata[1:5,] # Experiment with shorter df
+
 newList <- data.frame(word=character(), 
                       freq=character(),
                       otherMatches=character())
@@ -73,7 +76,7 @@ for (i in 1:100){
     aggregateSum <- sum(searchTermFreq, matchFreq) # Sum match frequencies
     
     # Add this to newList
-    newList <- rbind(newList, c(searchTerm, aggregateSum, matches))
+    newList <- rbind(newList, c(searchTerm, aggregateSum, paste(matches, collapse = ", ")))
     
     # Remove all summed terms
     for (k in 1:length(matches)) {
@@ -83,13 +86,6 @@ for (i in 1:100){
     }
   }
 }
-
-
-df444<-data.frame("hi","bye")
-
-which()
-
-grepl("level*", df.single$word)
 
 
 for(i in 1:nrow(df.single)){
