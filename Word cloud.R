@@ -57,20 +57,14 @@ newList <- data.frame(word=character(),
 newDfnrow <- nrow(df.single) # Initially set number of rows
 
 for (i in 1:100){
-  print(newDfnrow)
-  #cat(paste0("\n", df.single[i, 1], "\n"))
-  #cat(paste0(df.single[i, 2], "\n"))
-  
+  print(newDfnrow) # Rows left
+
   searchTerm <- df.single[i, 1]
   searchTermFreq <- df.single[i, 2]
   
   tempData <- df.single[grepl(paste("^", df.single[i, 1], "+", sep = ""), df.single$word), ]
   matches <- tempData[, 1]
   matchFreq <- tempData[, 2]
-  #matchFreq <- df.single$freq[grepl(paste("^", df.single[i, 1], "+", sep = ""), df.single$word)]
-  
-  #print(matches)
-  #print(matchFreq)
   
   if (length(matches) == 0) {
     newList <- rbind(newList, c(searchTerm, searchTermFreq, ""))
