@@ -51,31 +51,34 @@ df <- data.frame(word = names(words),freq=words)
 # Singularise where possible
 df.single <- df
 newList <- data.frame(word=character(), 
-                      freq=character())
+                      freq=character(),
+                      otherMatches=character())
 
-for (i in 1:10){
-  cat(paste0("\n", df.single[i, 1], "\n"))
-  cat(paste0(df.single[i, 2], "\n"))
+for (i in 1:200){
+  #cat(paste0("\n", df.single[i, 1], "\n"))
+  #cat(paste0(df.single[i, 2], "\n"))
   
   searchTerm <- df.single[i, 1]
   searchTermFreq <- df.single[i, 2]
   matches <- df.single$word[grepl(paste("^", df.single[i, 1], "s{1}", sep = ""), df.single$word)]
   matchFreq <- df.single$freq[grepl(paste("^", df.single[i, 1], "s{1}", sep = ""), df.single$word)]
   
-  print(matches)
-  print(matchFreq)
+  #print(matches)
+  #print(matchFreq)
   
   if (length(grep(paste("^", df.single[i, 1], "s{1}", sep = ""), df.single$word)) == 0) {
-    newList <- rbind(newList, c(searchTerm, searchTermFreq))
+    newList <- rbind(newList, c(searchTerm, searchTermFreq, ""))
   }
   else {
     aggregateSum <- sum(searchTermFreq, matchFreq) # Sum match frequencies
     
     # Add this to newList
-    newList <- rbind(newList, c(searchTerm, aggregateSum))
+    newList <- rbind(newList, c(searchTerm, aggregateSum, matches))
     
     # Remove all summed terms
-    #df.single <- df.single[!(grepl(matches, df.single[, 1]) & grepl(searchTerm, df.single[, 1]))]
+    for (k in 1:length(matches)) {
+      df.single <- df.single[!(grepl(matches[k], df.single[, 1])),]
+    }
     
     
     
