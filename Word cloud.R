@@ -50,8 +50,13 @@ df <- data.frame(word = names(words),freq=words)
 
 
 # Singularise where possible
-df.single <- df
-newdata <- mydata[1:5,] # Experiment with shorter df
+
+# Reorder dataframe alphabetically to get shorter forms first
+# And keep copy
+df.single <- df[order(df$word),]
+
+df.single
+#df.single <- df.single[1:300,] # Experiment with shorter df
 
 newList <- data.frame(word=character(), 
                       freq=character(),
@@ -59,13 +64,14 @@ newList <- data.frame(word=character(),
 
 newDfnrow <- nrow(df.single) # Initially set number of rows
 
-for (i in 1:100){
-  print(newDfnrow) # Rows left
+
+for (i in 1:500){
+  print(paste(i, " / ", newDfnrow, " = ", round(i / newDfnrow * 100, 1), "%", sep = "")) # Print current position and total rows following eliminations
 
   searchTerm <- df.single[i, 1]
   searchTermFreq <- df.single[i, 2]
   
-  tempData <- df.single[grepl(paste("^", df.single[i, 1], "+", sep = ""), df.single$word), ]
+  tempData <- df.single[grepl(paste("^", df.single[i, 1], "s{1}$", sep = ""), df.single$word), ]
   matches <- tempData[, 1]
   matchFreq <- tempData[, 2]
   
@@ -87,12 +93,13 @@ for (i in 1:100){
   }
 }
 
+# Reorder by frequency
+newList[, 2] <- as.numeric(as.character(newList[, 2]))
+newListS <- newList[order(-newList[, 2]),]
 
-for(i in 1:nrow(df.single)){
-  print(df.single[i, 1])
-  
-  if(df.single[i, 1])
-}
+# Show merged frequency table
+kable(newListS[!is.na(newListS[,1]),]) %>%
+  kableExtra::kable_styling()
 
 # Generate wordcloud
 wordcloud2(data=df, size=1.6, color='random-dark')
