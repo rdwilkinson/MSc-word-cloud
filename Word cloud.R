@@ -57,6 +57,8 @@ for (i in 1:10){
   cat(paste0("\n", df.single[i, 1], "\n"))
   cat(paste0(df.single[i, 2], "\n"))
   
+  searchTerm <- df.single[i, 1]
+  searchTermFreq <- df.single[i, 2]
   matches <- df.single$word[grepl(paste("^", df.single[i, 1], "s{1}", sep = ""), df.single$word)]
   matchFreq <- df.single$freq[grepl(paste("^", df.single[i, 1], "s{1}", sep = ""), df.single$word)]
   
@@ -64,10 +66,14 @@ for (i in 1:10){
   print(matchFreq)
   
   if (length(grep(paste("^", df.single[i, 1], "s{1}", sep = ""), df.single$word)) == 0) {
-    newList <- rbind(newList, c(df.single[i, 1], df.single[i, 2]))
+    newList <- rbind(newList, c(searchTerm, searchTermFreq))
   }
   else {
     print(sum(matchFreq)) # Sum match frequencies
+    
+    # Remove all summed terms
+    df.single <- df.single[!]
+    
     
     
     # for (j in 1:length(matches)) { # Cycle through each match
