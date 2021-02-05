@@ -8,6 +8,8 @@
 # Following various tutorials. 
 # Began with: https://towardsdatascience.com/create-a-word-cloud-with-r-bde3e7422e8a
 
+# Uses the Caveat font: https://fonts.google.com/specimen/Caveat?category=Handwriting&preview.text_type=custom#license
+
 
 # Packages -----------
 # install.packages("wordcloud") # Wordcloud package
@@ -167,7 +169,7 @@ set.seed(1234)
 wdc <- wordcloud2(data = newListS, # https://cran.r-project.org/web/packages/wordcloud2/wordcloud2.pdf
                   size = 1.05, 
                   color = colorVec,
-                  fontFamily = "Caveat",
+                  fontFamily = "Caveat", # Uses the Caveat font: https://fonts.google.com/specimen/Caveat?category=Handwriting&preview.text_type=custom#license
                   shuffle = TRUE,
                   rotateRatio = 0.4, 
                   shape = 'circle', 
