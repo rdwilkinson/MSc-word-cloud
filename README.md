@@ -1,6 +1,4 @@
 # Wordcloud for LinkedIn banner
-R. D. Wilkinson
-
 04-05/02/2021
 
 # What does the script do?
