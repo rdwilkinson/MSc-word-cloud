@@ -45,7 +45,15 @@ docs <- docs %>%
   tm_map(stripWhitespace) %>%
   tm_map(tolower) %>%
   tm_map(removeWords, stopwords("SMART")) %>%
-  tm_map(removeWords, c("tiri", "figure", "table", "finally", "clas", "level", "levels"))
+  tm_map(removeWords, c("tiri", "figure", 
+                        "table", "finally", 
+                        "clas", "level", 
+                        "levels", "variable",
+                        "variables", "high",
+                        "great", "greater",
+                        "higher", "analy", 
+                        "based", "using",
+                        "found"))
    
 
 
@@ -162,8 +170,32 @@ kable(newListS[!is.na(newListS[,1]),]) %>%
   kableExtra::kable_styling()
 
 # Generate wordcloud
+library(viridis)
+colorVec = colorRampPalette(c("black", "sky blue"))
+colorVec <- colorVec(15)
 set.seed(1234)
-wordcloud2(data=newListS, size=1, color='random-dark')
+wdc <- wordcloud2(data=newListS, 
+                  size=1.05, 
+                  color=colorVec,
+                  fontFamily = "Caveat",
+                  shuffle = TRUE,
+                  rotateRatio = 0.4, 
+                  shape = 'circle', ellipticity = 0.65,
+                  widgetsize = NULL, figPath = NULL, hoverFunction = NULL)
+
+
+
+install.packages("webshot")
+library(webshot)
+install.packages("htmlwidgets")
+webshot::install_phantomjs()
+library(wordcloud2)
+library(htmlwidgets)
+hw <- wordcloud2(demoFreq,size = 3)
+saveWidget(wdc,"3.html",selfcontained = F)
+webshot::webshot("3.html","3.png",vwidth = 1584, vheight = 396, delay =15) # https://stackoverflow.com/questions/51759893/how-to-save-the-wordcloud-in-r
+
+
 wordcloud(words = df$word, 
           freq = df$freq, 
           min.freq = 1,
