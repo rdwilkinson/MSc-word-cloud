@@ -3,7 +3,7 @@
 # 04-05/02/2021
 
 # Imports MSc submission files (docx), cleans text (stopwords, short words, etc.),
-# does some (very) basic lemmatising and then outputs wordcloud that is saved via webpage 
+# does some (very) basic stemming and then outputs wordcloud that is saved via webpage 
 
 # Following various tutorials. 
 # Began with: https://towardsdatascience.com/create-a-word-cloud-with-r-bde3e7422e8a
