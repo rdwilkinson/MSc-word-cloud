@@ -3,7 +3,7 @@
 # 04-05/02/2021
 
 # Imports MSc submission files (docx), cleans text (stopwords, short words, etc.),
-# does some basic stemming and then outputs wordcloud that is saved via webpage 
+# does some (very) basic lemmatising and then outputs wordcloud that is saved via webpage 
 
 # Following various tutorials. 
 # Began with: https://towardsdatascience.com/create-a-word-cloud-with-r-bde3e7422e8a
@@ -98,7 +98,7 @@ row.names(df.single) <- NULL
 kable(df.single) %>% # https://stackoverflow.com/questions/22863771/is-it-possible-to-view-an-html-table-in-the-viewer-pane
   kableExtra::kable_styling()
 
-# Create newlist for "stemmed" terms
+# Create newlist for "lemmatised" terms
 newList <- data.frame(word=character(), 
                       freq=character(),
                       otherMatches=character())
