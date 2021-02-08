@@ -141,7 +141,7 @@ for (i in 1:newDfnrow){
     aggregateSum <- sum(matchFreq) 
       
     # Add terms and sum to newList
-    newList <- rbind(newList, c(searchTerm, aggregateSum, paste(matches, collapse = ", ")))
+    newList <- rbind(newList, c(searchTerm, aggregateSum, paste(c(rbind(matches, matchFreq)), collapse = ", "))) #https://stackoverflow.com/questions/25961897/how-to-merge-2-vectors-alternating-indexes
       
     # Set matches' frequencies to 0 by cycling through them
     for (k in 1:length(matches)) {
@@ -154,6 +154,7 @@ for (i in 1:newDfnrow){
 ## Reorder newLList by word frequency
 newList[, 2] <- as.numeric(as.character(newList[, 2]))
 newListS <- newList[order(-newList[, 2]),]
+names(newListS) <- c("Term", "Freq.", "MatchBreakdown")
 
 # Show merged frequency table
 kable(newListS) %>%
