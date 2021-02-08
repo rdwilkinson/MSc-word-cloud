@@ -6,7 +6,7 @@ Creates a wordcloud PNG from my MSc in Social Research (2019-20) submissions (ap
 
 * Imports MSc submission files (docx)
 * Cleans text (stopwords, short words, etc.)
-* Does some basic stemming (custom loop)
+* Does some (very) basic lemmatising (custom loop)
 * Outputs wordcloud that is saved as a PNG file via a webpage 
 
 # Final banner PNG
